@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import '../App.css' // CSS faylni import qilish
 
 const RandomPhoneDisplay = () => {
   const [displayNumber, setDisplayNumber] = useState('998000000000')
@@ -51,12 +52,12 @@ const RandomPhoneDisplay = () => {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center h-screen p-4'>
-      <div className='text-6xl font-bold m-8 max-sm:m-4'>
+    <div className='flex flex-col items-center justify-center h-screen p-4 relative overflow-hidden bg-gradient framed'>
+      <div className='text-6xl font-bold m-8 max-sm:m-4 text-white drop-shadow-lg'>
         <h1 className='text-6xl max-sm:text-3xl'>{displayNumber}</h1>
       </div>
       <button
-        className='px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-700 transition duration-300 max-sm:px-3 max-sm:py-1 max-sm:text-sm'
+        className='px-6 py-3 bg-pink-500 text-white font-semibold rounded-full shadow-lg hover:bg-pink-700 transition duration-300 max-sm:px-4 max-sm:py-2 max-sm:text-base animate-bounce'
         onClick={fetchPhoneNumber}
         disabled={loading}
       >
