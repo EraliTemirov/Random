@@ -51,10 +51,12 @@ const RandomPhoneDisplay = () => {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center h-screen'>
-      <div className='text-5xl font-bold mb-8'>{displayNumber}</div>
+    <div className='flex flex-col items-center justify-center h-screen p-4'>
+      <div className='text-6xl font-bold m-8 max-sm:m-4'>
+        <h1 className='text-6xl max-sm:text-3xl'>{displayNumber}</h1>
+      </div>
       <button
-        className='px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-700 transition duration-300'
+        className='px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-700 transition duration-300 max-sm:px-3 max-sm:py-1 max-sm:text-sm'
         onClick={fetchPhoneNumber}
         disabled={loading}
       >
