@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import '../App.css' // CSS faylni import qilish
+import '../App.css'
 
 const RandomPhoneDisplay = () => {
   const [displayNumber, setDisplayNumber] = useState('998000000000')
@@ -57,7 +57,7 @@ const RandomPhoneDisplay = () => {
         <h1 className='text-6xl max-sm:text-3xl'>{displayNumber}</h1>
       </div>
       <button
-        className='px-6 py-3 bg-pink-500 text-white font-semibold rounded-full shadow-lg hover:bg-pink-700 transition duration-300 max-sm:px-4 max-sm:py-2 max-sm:text-base animate-bounce'
+        className='px-6 py-3 mt-6 bg-pink-500 text-white font-semibold rounded-full shadow-lg hover:bg-pink-700 transition duration-300 max-sm:px-4 max-sm:py-2 max-sm:text-base animate-bounce'
         onClick={fetchPhoneNumber}
         disabled={loading}
       >
