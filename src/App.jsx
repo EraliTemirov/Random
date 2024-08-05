@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import HomePage, { checkAuthToken } from "./Pages/HomePage";
+import HomePage from "./Pages/HomePage";
 import Register from "./Pages/Regester";
 import "./App.css";
+import { checkAuthToken } from "./helper.ts";
 
 function App() {
   const [isRegistered, setIsRegistered] = React.useState(false);
@@ -11,7 +12,8 @@ function App() {
   };
   useEffect(() => {
     checkAuthToken()
-      .then(() => {
+      .then((data) => {
+        console.log("Autentifikatsiya muvaffaqiyatli:", data);
         setIsRegistered(true);
       })
       .catch((error) => {
