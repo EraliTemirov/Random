@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Gift } from "lucide-react";
 import ReactConfetti from "react-confetti";
-
+import imagePacc from "../assets/рассс.jpg";
 const AnimatedNumber = ({ number, onComplete, isSingle }) => {
   const [displayNumber, setDisplayNumber] = useState("");
   const [isComplete, setIsComplete] = useState(false);
@@ -264,7 +264,15 @@ export default function GiftDistribution() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-purple-600 to-pink-500 overflow-hidden">
+    <div
+      className="flex flex-col min-h-screen bg-gradient-to-br from-purple-600 to-pink-500 overflow-hidden"
+      style={{
+        backgroundImage: `url(${imagePacc})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <style jsx global>{`
         html,
         body {
