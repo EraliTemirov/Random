@@ -202,13 +202,16 @@ export default function GiftDistribution() {
 
   const fetchGifts = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/v1/auth/gifts", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://whale-app-lmern.ondigitalocean.app/api/v1/auth/gifts",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (!response.ok) {
         throw new Error("Sovg'alarni olishda xatolik yuz berdi");
       }
@@ -236,7 +239,7 @@ export default function GiftDistribution() {
       setSelectedGiftIndex(nextGiftIndex);
 
       const response = await fetch(
-        `http://localhost:3000/api/v1/auth/gifts/random`,
+        `https://whale-app-lmern.ondigitalocean.app/api/v1/auth/gifts/random`,
         {
           method: "GET",
           headers: {
