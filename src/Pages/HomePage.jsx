@@ -317,8 +317,8 @@ export default function GiftDistribution() {
           border: 3px solid rgba(255, 255, 255, 0.1);
         }
       `}</style>
-      <div className="p-4 flex-grow flex flex-col overflow-hidden mt-20">
-        <div className="flex-grow flex flex-col items-center justify-start overflow-y-auto custom-scrollbar">
+      <div className="p-4 flex-grow flex flex-col overflow-hidden ">
+        <div className="flex-grow flex flex-col items-center justify-start overflow-y-auto custom-scrollbar mt-52">
           <h1 className="text-6xl max-sm:text-3xl font-bold text-white drop-shadow-lg mb-20">
             Sovg'alar
           </h1>
