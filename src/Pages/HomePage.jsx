@@ -349,7 +349,7 @@ export default function GiftDistribution() {
                   key={index}
                   giftName={item.giftName}
                   userPhone={item.userPhone}
-                  giftImage={item.giftImage}
+                  giftImage={item.image}
                   show={index <= showIndex}
                   onComplete={handleCardComplete}
                   isSingle={distributionResult.length === 1}
