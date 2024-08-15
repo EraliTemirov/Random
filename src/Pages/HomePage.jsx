@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Gift } from "lucide-react";
 import ReactConfetti from "react-confetti";
 import imagePacc from "../assets/рассс.jpg";
+
 const AnimatedNumber = ({ number, onComplete, isSingle }) => {
   const [displayNumber, setDisplayNumber] = useState("");
   const [isComplete, setIsComplete] = useState(false);
@@ -96,7 +97,14 @@ const AnimatedText = ({ text, onComplete, isSingle }) => {
   );
 };
 
-const GiftCard = ({ giftName, userPhone, show, onComplete, isSingle }) => {
+const GiftCard = ({
+  giftName,
+  userPhone,
+  giftImage,
+  show,
+  onComplete,
+  isSingle,
+}) => {
   const [showNumber, setShowNumber] = useState(false);
   const [showName, setShowName] = useState(false);
   const [showCongrats, setShowCongrats] = useState(false);
@@ -137,48 +145,57 @@ const GiftCard = ({ giftName, userPhone, show, onComplete, isSingle }) => {
 
   return (
     <div
-      className={`bg-white bg-opacity-20 p-8 rounded-2xl shadow-2xl transition-all duration-500 ${
+      className={`bg-white bg-opacity-20 p-8 rounded-2xl shadow-2xl transition-all duration-300 flex ${
         show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       } ${isSingle ? "text-center w-full max-w-2xl mx-auto" : ""}`}
     >
-      {showNumber && (
-        <div
-          className={`flex items-center space-x-4 ${
-            isSingle ? "justify-center" : ""
-          }`}
-        >
-          <span className={`text-white ${isSingle ? "text-2xl" : "text-xl"}`}>
-            Telefon:
-          </span>
-          <AnimatedNumber
-            number={userPhone}
-            onComplete={handleNumberComplete}
-            isSingle={isSingle}
-          />
-        </div>
-      )}
-      {showName && (
-        <div className="mt-6">
-          <AnimatedText
-            text={giftName}
-            onComplete={handleNameComplete}
-            isSingle={isSingle}
-          />
-        </div>
-      )}
-      {showCongrats && (
-        <ReactConfetti
-          width={windowSize.width}
-          height={windowSize.height}
-          recycle={false}
-          numberOfPieces={150}
-          gravity={0.1}
-          tweenDuration={5000}
-          initialVelocityX={3}
-          initialVelocityY={5}
-          colors={["#FFD700", "#FFA500", "#FF6347", "#FF69B4", "#00CED1"]}
+      <div className="flex-shrink-0 mr-4">
+        <img
+          src={giftImage}
+          alt={giftName}
+          className="w-24 h-24 object-cover rounded-lg"
         />
-      )}
+      </div>
+      <div className="flex-grow">
+        {showNumber && (
+          <div
+            className={`flex items-center space-x-4 ${
+              isSingle ? "justify-center" : ""
+            }`}
+          >
+            <span className={`text-white ${isSingle ? "text-2xl" : "text-xl"}`}>
+              Telefon:
+            </span>
+            <AnimatedNumber
+              number={userPhone}
+              onComplete={handleNumberComplete}
+              isSingle={isSingle}
+            />
+          </div>
+        )}
+        {showName && (
+          <div className="mt-6">
+            <AnimatedText
+              text={giftName}
+              onComplete={handleNameComplete}
+              isSingle={isSingle}
+            />
+          </div>
+        )}
+        {showCongrats && (
+          <ReactConfetti
+            width={windowSize.width}
+            height={windowSize.height}
+            recycle={false}
+            numberOfPieces={150}
+            gravity={0.1}
+            tweenDuration={5000}
+            initialVelocityX={3}
+            initialVelocityY={5}
+            colors={["#FFD700", "#FFA500", "#FF6347", "#FF69B4", "#00CED1"]}
+          />
+        )}
+      </div>
     </div>
   );
 };
@@ -254,7 +271,12 @@ export default function GiftDistribution() {
       }
 
       const data = await response.json();
-      setDistributionResult(data.data);
+      setDistributionResult(
+        data.data.map((gift) => ({
+          ...gift,
+          giftImage: gift.giftImage || "default-gift-image.jpg", // Use a default image if none provided
+        }))
+      );
       setShowIndex(0);
     } catch (err) {
       setError(err.message);
@@ -265,7 +287,7 @@ export default function GiftDistribution() {
 
   return (
     <div
-      className="flex flex-col min-h-screen bg-gradient-to-br from-purple-600 to-pink-500 overflow-hidden"
+      className="flex flex-col h-screen bg-gradient-to-br from-purple-600 to-pink-500 overflow-hidden"
       style={{
         backgroundImage: `url(${imagePacc})`,
         backgroundSize: "cover",
@@ -296,8 +318,8 @@ export default function GiftDistribution() {
         }
       `}</style>
       <div className="p-4 flex-grow flex flex-col overflow-hidden">
-        <div className="flex-grow flex flex-col items-center justify-center overflow-y-auto custom-scrollbar">
-          <h1 className="text-6xl max-sm:text-3xl font-bold text-white drop-shadow-lg mb-8">
+        <div className="flex-grow flex flex-col items-center justify-start overflow-y-auto custom-scrollbar">
+          <h1 className="text-6xl max-sm:text-3xl font-bold text-white drop-shadow-lg mb-20">
             Sovg'alar
           </h1>
           <button
@@ -321,29 +343,18 @@ export default function GiftDistribution() {
             </div>
           )}
           {distributionResult && (
-            <div className="w-full max-w-4xl px-4">
-              <div className="space-y-6">
-                {distributionResult.length === 1 ? (
-                  <GiftCard
-                    giftName={distributionResult[0].giftName}
-                    userPhone={distributionResult[0].userPhone}
-                    show={true}
-                    onComplete={() => {}}
-                    isSingle={true}
-                  />
-                ) : (
-                  distributionResult.map((item, index) => (
-                    <GiftCard
-                      key={index}
-                      giftName={item.giftName}
-                      userPhone={item.userPhone}
-                      show={index <= showIndex}
-                      onComplete={handleCardComplete}
-                      isSingle={false}
-                    />
-                  ))
-                )}
-              </div>
+            <div className="w-full max-w-4xl px-4 space-y-6">
+              {distributionResult.map((item, index) => (
+                <GiftCard
+                  key={index}
+                  giftName={item.giftName}
+                  userPhone={item.userPhone}
+                  giftImage={item.giftImage}
+                  show={index <= showIndex}
+                  onComplete={handleCardComplete}
+                  isSingle={distributionResult.length === 1}
+                />
+              ))}
             </div>
           )}
         </div>
