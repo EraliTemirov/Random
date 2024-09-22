@@ -220,7 +220,7 @@ export default function GiftDistribution() {
   const fetchGifts = async () => {
     try {
       const response = await fetch(
-        "https://whale-app-lmern.ondigitalocean.app/api/v1/auth/gifts",
+        "https://walrus-app-zqt9j.ondigitalocean.app/api/v1/auth/gifts",
         {
           method: "GET",
           headers: {
@@ -256,7 +256,7 @@ export default function GiftDistribution() {
       setSelectedGiftIndex(nextGiftIndex);
 
       const response = await fetch(
-        `https://whale-app-lmern.ondigitalocean.app/api/v1/auth/gifts/random`,
+        `https://walrus-app-zqt9j.ondigitalocean.app/api/v1/auth/gifts/random`,
         {
           method: "GET",
           headers: {

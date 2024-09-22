@@ -7,7 +7,7 @@ export const checkAuthToken = async () => {
   }
 
   try {
-    const response = await fetch("https://whale-app-lmern.ondigitalocean.app/api/v1/auth/me", {
+    const response = await fetch("https://walrus-app-zqt9j.ondigitalocean.app/api/v1/auth/me", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,

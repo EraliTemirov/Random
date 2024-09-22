@@ -26,7 +26,7 @@ const Regester = ({ onRegister }) => {
 
     try {
       const response = await fetch(
-        "https://whale-app-lmern.ondigitalocean.app/api/v1/auth/enter-code",
+        "https://walrus-app-zqt9j.ondigitalocean.app/api/v1/auth/enter-code",
         {
           method: "POST",
           headers: {
